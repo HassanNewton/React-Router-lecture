@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  NavLink,
+  useParams,
+} from "react-router-dom";
+import "./App.css";
+import Home from "./components/Home";
+import About from "./components/About";
+import Product from "./components/Product";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-container">
+        <nav className="navbar">
+          <NavLink to="/" className="nav-link">
+            Hem
+          </NavLink>
+          <NavLink to="/about" className="nav-link">
+            Om oss
+          </NavLink>
+        </nav>
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+
+            <Route path="/products/:productId" element={<Product />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
+//  <NavLink
+//           to="/about"
+//           style={({ isActive }) => ({
+//             fontWeight: isActive ? "bold" : "normal",
+//           })}
+//         >
